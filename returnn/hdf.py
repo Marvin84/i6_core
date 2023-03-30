@@ -315,7 +315,9 @@ class RasrAlignmentDumpHDFJob(Job):
         from i6_core.lib.rasr_cache import FileArchive
         import numpy as np
 
-        state_tying = dict((k, int(v)) for l in open(self.state_tying_file.get_path()) for k, v in [l.strip().split()[0:2]])
+        state_tying = dict(
+            (k, int(v)) for l in open(self.state_tying_file.get_path()) for k, v in [l.strip().split()[0:2]]
+        )
 
         alignment_cache = FileArchive(
             self.alignment_caches[min(task_id - 1, len(self.alignment_caches) - 1)].get_path()
@@ -347,4 +349,3 @@ class RasrAlignmentDumpHDFJob(Job):
             )
 
         out_hdf.close()
-
